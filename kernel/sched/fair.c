@@ -3886,16 +3886,18 @@ static inline void update_sg_lb_stats(struct sched_domain *sd,
 			load = target_load(i, load_idx);
 		} else {
 			load = source_load(i, load_idx);
-			if (load > max_cpu_load) {
-				max_cpu_load = load;
-				max_nr_running = rq->nr_running;
+			scaled_load = load * SCHED_POWER_SCALE
+					/ cpu_rq(i)->cpu_power;
+			if (scaled_load > max_cpu_load) {
+				max_cpu_load = scaled_load;
+				max_nr_running = rq->cfs.h_nr_running;
 			}
 			if (min_cpu_load > load)
 				min_cpu_load = load;
 		}
 
 		sgs->group_load += load;
-		sgs->sum_nr_running += rq->nr_running;
+		sgs->sum_nr_running += rq->cfs.h_nr_running;
 		sgs->sum_weighted_load += weighted_cpuload(i);
 		if (idle_cpu(i))
 			sgs->idle_cpus++;
