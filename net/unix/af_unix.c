@@ -2292,7 +2292,6 @@ static struct sock *unix_next_socket(struct seq_file *seq,
 		if (sock_net(sk) == seq_file_net(seq))
 			return sk;
 	}
-
 	do {
 		sk = unix_from_bucket(seq, pos);
 		if (sk)
