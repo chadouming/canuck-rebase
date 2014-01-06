@@ -3863,7 +3863,7 @@ static inline void update_sg_lb_stats(struct sched_domain *sd,
 	unsigned long load, max_cpu_load, min_cpu_load, max_nr_running;
 	int i;
 	unsigned int balance_cpu = -1, first_idle_cpu = 0;
-	unsigned long avg_load_per_task = 0;
+	unsigned long avg_load_per_task = 0, scaled_load = 0;
 
 	if (local_group)
 		balance_cpu = group_first_cpu(group);
