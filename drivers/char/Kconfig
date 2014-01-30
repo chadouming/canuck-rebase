@@ -263,6 +263,14 @@ config NWFLASH
 
 source "drivers/char/hw_random/Kconfig"
 
+config FRANDOM
+	tristate "Frandom random number generator support"
+	default n
+	---help---
+          Enable the support of frandom pseudo random number generator
+	  It is about 10 times faster than urandom.
+	  Use m to compile as a module named frandom.ko
+
 config NVRAM
 	tristate "/dev/nvram support"
 	depends on ATARI || X86 || (ARM && RTC_DRV_CMOS) || GENERIC_NVRAM
