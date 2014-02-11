@@ -223,8 +223,8 @@ struct clk_ops clk_ops_gen_mux = {
 static long __div_round_rate(struct div_data *data, unsigned long rate,
 	struct clk *parent, unsigned int *best_div, unsigned long *best_prate)
 {
-	unsigned int div, min_div, max_div, _best_div = 1;
-	unsigned long prate, _best_prate = 0, rrate = 0;
+	unsigned int div = 0, min_div = 0, max_div = 0, _best_div = 1;
+	unsigned long prate = 0, _best_prate = 0, rrate = 0;
 
 	rate = max(rate, 1UL);
 
@@ -276,8 +276,8 @@ static long div_round_rate(struct clk *c, unsigned long rate)
 static int div_set_rate(struct clk *c, unsigned long rate)
 {
 	struct div_clk *d = to_div_clk(c);
-	int div, rc = 0;
-	long rrate, old_prate, new_prate;
+	int div = 0, rc = 0;
+	long rrate = 0, old_prate = 0, new_prate = 0;
 	struct div_data *data = &d->data;
 
 	rrate = __div_round_rate(data, rate, c->parent, &div, &new_prate);
@@ -378,8 +378,8 @@ static long __slave_div_round_rate(struct clk *c, unsigned long rate,
 					int *best_div)
 {
 	struct div_clk *d = to_div_clk(c);
-	unsigned int div, min_div, max_div;
-	long p_rate;
+	unsigned int div = 0, min_div = 0, max_div = 0;
+	long p_rate = 0;
 
 	rate = max(rate, 1UL);
 
@@ -404,8 +404,8 @@ static long slave_div_round_rate(struct clk *c, unsigned long rate)
 static int slave_div_set_rate(struct clk *c, unsigned long rate)
 {
 	struct div_clk *d = to_div_clk(c);
-	int div, rc = 0;
-	long rrate;
+	int div = 0, rc = 0;
+	long rrate = 0;
 
 	rrate = __slave_div_round_rate(c, rate, &div);
 	if (rrate != rate)
@@ -517,7 +517,7 @@ static long __mux_div_round_rate(struct clk *c, unsigned long rate,
 	struct clk **best_parent, int *best_div, unsigned long *best_prate)
 {
 	struct mux_div_clk *md = to_mux_div_clk(c);
-	unsigned int i;
+	unsigned int i = 0;
 	unsigned long rrate, best = 0, _best_div = 0, _best_prate = 0;
 	struct clk *_best_parent = 0;
 
@@ -559,7 +559,7 @@ static long mux_div_clk_round_rate(struct clk *c, unsigned long rate)
 /* requires enable lock to be held */
 static int __set_src_div(struct mux_div_clk *md, struct clk *parent, u32 div)
 {
-	u32 rc = 0, src_sel;
+	u32 rc = 0, src_sel = 0;
 
 	src_sel = parent_to_src_sel(md->parents, md->num_parents, parent);
 	/*
@@ -578,7 +578,7 @@ static int __set_src_div(struct mux_div_clk *md, struct clk *parent, u32 div)
 
 static int set_src_div(struct mux_div_clk *md, struct clk *parent, u32 div)
 {
-	unsigned long flags;
+	unsigned long flags = 0;
 	u32 rc;
 
 	spin_lock_irqsave(&md->c.lock, flags);
@@ -591,8 +591,8 @@ static int set_src_div(struct mux_div_clk *md, struct clk *parent, u32 div)
 /* Must be called after handoff to ensure parent clock rates are initialized */
 static int safe_parent_init_once(struct clk *c)
 {
-	unsigned long rrate;
-	u32 best_div;
+	unsigned long rrate = 0;
+	u32 best_div = 0;
 	struct clk *best_parent;
 	struct mux_div_clk *md = to_mux_div_clk(c);
 
@@ -617,11 +617,11 @@ static int safe_parent_init_once(struct clk *c)
 static int mux_div_clk_set_rate(struct clk *c, unsigned long rate)
 {
 	struct mux_div_clk *md = to_mux_div_clk(c);
-	unsigned long flags, rrate;
-	unsigned long new_prate, old_prate;
+	unsigned long flags = 0, rrate = 0;
+	unsigned long new_prate = 0, old_prate = 0;
 	struct clk *old_parent, *new_parent;
 	u32 new_div, old_div;
-	int rc;
+	int rc = 0;
 
 	rc = safe_parent_init_once(c);
 	if (rc)
@@ -690,7 +690,7 @@ err_set_rate:
 static struct clk *mux_div_clk_get_parent(struct clk *c)
 {
 	struct mux_div_clk *md = to_mux_div_clk(c);
-	u32 i, div, src_sel;
+	u32 i = 0, div = 0, src_sel = 0;
 
 	md->ops->get_src_div(md, &src_sel, &div);
 
@@ -708,7 +708,7 @@ static struct clk *mux_div_clk_get_parent(struct clk *c)
 static enum handoff mux_div_clk_handoff(struct clk *c)
 {
 	struct mux_div_clk *md = to_mux_div_clk(c);
-	unsigned long parent_rate;
+	unsigned long parent_rate = 0;
 
 	parent_rate = clk_get_rate(c->parent);
 	c->rate = parent_rate / md->data.div;

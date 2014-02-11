@@ -604,13 +604,13 @@ extern struct in6_addr *fl6_update_dst(struct flowi6 *fl6,
  *	socket options (ipv6_sockglue.c)
  */
 
-extern int			ipv6_setsockopt(struct sock *sk, int level, 
+extern int			ipv6_setsockopt(struct sock *sk, int level,
 						int optname,
-						char __user *optval, 
+						char __user *optval,
 						unsigned int optlen);
-extern int			ipv6_getsockopt(struct sock *sk, int level, 
+extern int			ipv6_getsockopt(struct sock *sk, int level,
 						int optname,
-						char __user *optval, 
+						char __user *optval,
 						int __user *optlen);
 extern int			compat_ipv6_setsockopt(struct sock *sk,
 						int level,
@@ -623,7 +623,7 @@ extern int			compat_ipv6_getsockopt(struct sock *sk,
 						char __user *optval,
 						int __user *optlen);
 
-extern int			ip6_datagram_connect(struct sock *sk, 
+extern int			ip6_datagram_connect(struct sock *sk,
 						     struct sockaddr *addr, int addr_len);
 
 extern int 			ipv6_recv_error(struct sock *sk, struct msghdr *msg, int len,
@@ -636,11 +636,11 @@ extern void			ipv6_local_error(struct sock *sk, int err, struct flowi6 *fl6, u32
 extern void			ipv6_local_rxpmtu(struct sock *sk, struct flowi6 *fl6, u32 mtu);
 
 extern int inet6_release(struct socket *sock);
-extern int inet6_bind(struct socket *sock, struct sockaddr *uaddr, 
+extern int inet6_bind(struct socket *sock, struct sockaddr *uaddr,
 		      int addr_len);
 extern int inet6_getname(struct socket *sock, struct sockaddr *uaddr,
 			 int *uaddr_len, int peer);
-extern int inet6_ioctl(struct socket *sock, unsigned int cmd, 
+extern int inet6_ioctl(struct socket *sock, unsigned int cmd,
 		       unsigned long arg);
 
 extern int inet6_hash_connect(struct inet_timewait_death_row *death_row,

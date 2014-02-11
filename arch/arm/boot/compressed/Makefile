@@ -23,6 +23,9 @@ endif
 
 AFLAGS_head.o += -DTEXT_OFFSET=$(TEXT_OFFSET)
 AFLAGS_head.o += -Wa,-mcpu=cortex-a15
+AFLAGS_misc.o +=-Wa,-mcpu=cortex-a15
+AFLAGS_decompress.o += -Wa,-mcpu=cortex-a15
+
 HEAD	= head.o
 OBJS	+= misc.o
 FONTC	= $(srctree)/drivers/video/console/font_acorn_8x8.c
@@ -166,6 +169,7 @@ $(obj)/lib1funcs.S: $(srctree)/arch/$(SRCARCH)/lib/lib1funcs.S
 AFLAGS_ashldi3.o += -Wa,-mcpu=cortex-a15
 ashldi3 = $(obj)/ashldi3.o
 
+AFLAGS_ashldi3.o +=-Wa,-march=armv7-a$(plus_sec)
 $(obj)/ashldi3.S: $(srctree)/arch/$(SRCARCH)/lib/ashldi3.S
 	$(call cmd,shipped)
 
@@ -199,6 +203,7 @@ AFLAGS_piggy.$(suffix_y).o += -Wa,-mcpu=cortex-a15
 $(obj)/piggy.$(suffix_y): $(obj)/../Image FORCE
 	$(call if_changed,$(suffix_y))
 
+AFLAGS_piggy.$(suffix_y).o += -Wa,-march=armv7-a$(plus_sec)
 $(obj)/piggy.$(suffix_y).o:  $(obj)/piggy.$(suffix_y) FORCE
 
 CFLAGS_font.o := -Dstatic=

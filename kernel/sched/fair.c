@@ -3860,8 +3860,8 @@ static inline void update_sg_lb_stats(struct sched_domain *sd,
 			int local_group, const struct cpumask *cpus,
 			int *balance, struct sg_lb_stats *sgs)
 {
-	unsigned long scaled_load, load, max_cpu_load, min_cpu_load, max_nr_running;
-	int i;
+	unsigned long load = 0, max_cpu_load = 0, min_cpu_load = 0, max_nr_running = 0;
+	int i = 0;
 	unsigned int balance_cpu = -1, first_idle_cpu = 0;
 	unsigned long avg_load_per_task = 0, scaled_load = 0;
 

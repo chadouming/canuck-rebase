@@ -935,7 +935,6 @@ static ssize_t extract_entropy(struct entropy_store *r, void *buf,
 	if (fips_enabled && !r->last_data_init)
 		nbytes += EXTRACT_SIZE;
 
-	trace_extract_entropy(r->name, nbytes, r->entropy_count, _RET_IP_);
 	xfer_secondary_pool(r, nbytes);
 	nbytes = account(r, nbytes, min, reserved);
 
