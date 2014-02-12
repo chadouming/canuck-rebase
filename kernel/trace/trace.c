@@ -415,11 +415,9 @@ EXPORT_SYMBOL_GPL(tracing_is_on);
  */
 void trace_wake_up(void)
 {
-	const unsigned long delay = msecs_to_jiffies(2);
-
 	if (trace_flags & TRACE_ITER_BLOCK)
 		return;
-	schedule_delayed_work(&wakeup_work, delay);
+	queue_delayed_work(system_power_efficient_wq, &wakeup_work, msecs_to_jiffies(2));
 }
 
 static int __init set_buf_size(char *str)
