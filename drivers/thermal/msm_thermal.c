@@ -838,7 +838,7 @@ static void __ref check_temp(struct work_struct *work)
 
 reschedule:
 	if (enabled)
-		schedule_delayed_work(&check_temp_work,
+		queue_delayed_work_on(0, system_power_efficient_wq, &check_temp_work,
 				msecs_to_jiffies(msm_thermal_info.poll_ms));
 }
 
@@ -1220,11 +1220,11 @@ int __devinit msm_thermal_init(struct msm_thermal_data *pdata)
 			KBUILD_MODNAME);
 
 	INIT_DELAYED_WORK(&check_temp_work, check_temp);
-	schedule_delayed_work(&check_temp_work, 20);
+	schedule_delayed_work(&check_temp_work, msecs_to_jiffies(10000));
 
 	if (num_possible_cpus() > 1) {
 		mutex_lock(&core_control_mutex);
-		core_control_enabled = 1;
+		core_control_enabled = 0; // Disable core control
 		register_cpu_notifier(&msm_thermal_cpu_notifier);
 		update_offline_cores(cpus_offlined);
 		mutex_unlock(&core_control_mutex);
