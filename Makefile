@@ -245,7 +245,7 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -Ofast -fomit-frame-pointer
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -Ofast -fomit-frame-pointer -Wno-maybe-uninitialized
 HOSTCXXFLAGS = -Ofast
 
 # Decide whether to build built-in, modular, or both.
@@ -355,7 +355,7 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 COMMON_FLAGS	= -Ofast -fsched-spec-load -mcpu=cortex-a15 -mtune=cortex-a15 \
 		  -mfpu=neon-vfpv4 -marm -funroll-loops -fmodulo-sched \
 		  -fmodulo-sched-allow-regmoves -fsingle-precision-constant \
-		  -munaligned-access
+		  -munaligned-access -Wno-maybe-uninitialized
 CFLAGS_MODULE   = -DMODULE $(COMMON_FLAGS)
 AFLAGS_MODULE   = -DMODULE $(COMMON_FLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds
