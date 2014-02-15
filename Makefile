@@ -353,9 +353,9 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 
 COMMON_FLAGS	= -Ofast -fsched-spec-load -mcpu=cortex-a15 -mtune=cortex-a15 \
-		  -mfpu=neon-vfpv4 -marm -funroll-loops -fmodulo-sched \
+		  -mfpu=vfpv4 -marm -funroll-loops -fmodulo-sched \
 		  -fmodulo-sched-allow-regmoves -fsingle-precision-constant \
-		  -munaligned-access -Wno-maybe-uninitialized
+		  -munaligned-access -Wno-maybe-uninitialized -mfloat-abi=hard
 CFLAGS_MODULE   = -DMODULE $(COMMON_FLAGS)
 AFLAGS_MODULE   = -DMODULE $(COMMON_FLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds
@@ -378,7 +378,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
                    -Werror-implicit-function-declaration \
                    -Wno-format-security \
                    -fno-delete-null-pointer-checks \
-                   $(COMMON_FLAGS)
+		   $(COMMON_FLAGS)
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
