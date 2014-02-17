@@ -18,7 +18,7 @@
 #include <linux/mutex.h>
 #include <linux/platform_device.h>
 #include <linux/io.h>
-#include <linux/earlysuspend.h>
+#include <linux/powersuspend.h>
 
 #include <mach/iommu_domains.h>
 
@@ -122,7 +122,7 @@ struct mdp3_hw_resource {
 
 	int irq_registered;
 
-	struct early_suspend suspend_handler;
+	struct power_suspend suspend_handler;
 };
 
 struct mdp3_img_data {

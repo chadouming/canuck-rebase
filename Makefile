@@ -355,7 +355,8 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 COMMON_FLAGS	= -Ofast -fsched-spec-load -mcpu=cortex-a15 -mtune=cortex-a15 \
 		  -mfpu=vfpv4 -marm -funroll-loops -fmodulo-sched -s \
 		  -fmodulo-sched-allow-regmoves -fsingle-precision-constant \
-		  -munaligned-access -Wno-maybe-uninitialized -mfloat-abi=hard
+		  -munaligned-access -Wno-maybe-uninitialized -mfloat-abi=hard \
+		  -Wno-array-bounds
 CFLAGS_MODULE   = -DMODULE $(COMMON_FLAGS)
 AFLAGS_MODULE   = -DMODULE $(COMMON_FLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds

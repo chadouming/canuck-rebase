@@ -15,7 +15,7 @@
 #define MDSS_H
 
 #include <linux/msm_ion.h>
-#include <linux/earlysuspend.h>
+#include <linux/powersuspend.h>
 #include <linux/msm_mdp.h>
 #include <linux/spinlock.h>
 #include <linux/types.h>
@@ -147,7 +147,7 @@ struct mdss_data_type {
 	int iommu_attached;
 	struct mdss_iommu_map_type *iommu_map;
 
-	struct early_suspend early_suspend;
+	struct power_suspend power_suspend;
 	void *debug_data;
 	struct completion iommu_attach_done;
 	int current_bus_idx;
